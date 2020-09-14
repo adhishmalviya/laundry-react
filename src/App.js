@@ -1,3 +1,4 @@
+//mapbox://styles/adhish1/ckf2qj9w743ic19s9d0onpl29
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import LandingPage from "./components/landingPage";
@@ -5,7 +6,6 @@ import NavBar from "./components/NavBar";
 import jwtDecode from "jwt-decode";
 import NearByShops from "./components/mapNearbyStores";
 import Pickup from "./components/Pickup";
-import UpdateShop from "./components/UpdateShop";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Payment from "./components/Payment";
 import Order from "./components/Orders";
@@ -13,7 +13,9 @@ import LoginForm from "./components/loginForm";
 import RegisterUserForm from "./components/RegisterUserForm";
 import RegisterShopForm from "./components/RegisterShopForm";
 import Profile from "./components/profile";
-export default class App extends Component {
+import { geolocated } from "react-geolocated";
+
+class App extends Component {
   state = {};
 
   componentDidMount() {
@@ -31,13 +33,27 @@ export default class App extends Component {
         <NavBar user={user} />
         <div className="content">
           <Switch>
-          //just to check order routes are working or not
-          <Route exact path="/order" component={Order} />
+            <Route exact path="/order" component={Order} />
             <Route path="/" exact component={LandingPage} />
-            <Route
-              path="/nearby"
-              component={() => <NearByShops user={user} />}
-            />
+            {!this.props.isGeolocationAvailable ? (
+              <div>Your browser does not support Geolocation</div>
+            ) : !this.props.isGeolocationEnabled ? (
+              <div>Geolocation is not enabled</div>
+            ) : this.props.coords ? (
+              <Route
+                path="/nearby"
+                component={() => (
+                  <NearByShops
+                    user={user}
+                    lat={this.props.coords.latitude}
+                    lng={this.props.coords.longitude}
+                  />
+                )}
+              />
+            ) : (
+              <div>Getting the location data&hellip; </div>
+            )}
+
             <Route path="/profile" component={Profile} />
             <Route exact path="/login" component={LoginForm} />
             <Route exact path="/registershop" component={RegisterShopForm} />
@@ -52,11 +68,27 @@ export default class App extends Component {
               component={() => <h1>In Development</h1>}
             />
             <Route exact path="/book" component={Pickup} />
-            <Route exact path="/shops/{myid}" component={UpdateShop} />
             <Route exact path="/payment" component={Payment} />
           </Switch>
         </div>
+        {/* {!this.props.isGeolocationAvailable ? (
+          <div>Your browser does not support Geolocation</div>
+        ) : !this.props.isGeolocationEnabled ? (
+          <div>Geolocation is not enabled</div>
+        ) : this.props.coords ? (
+          <div>
+            {this.props.coords.latitude} {this.props.coords.longitude}
+          </div>
+        ) : (
+          <div>Getting the location data&hellip; </div>
+        )} */}
       </div>
     );
   }
 }
+export default geolocated({
+  positionOptions: {
+    enableHighAccuracy: false,
+  },
+  userDecisionTimeout: 5000,
+})(App);

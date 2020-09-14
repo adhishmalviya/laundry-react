@@ -1,14 +1,16 @@
 import React, { Component } from "react";
-import { Pickup } from "./PickupFunction";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import jwtDecode from "jwt-decode";
 
 class PickupUser extends Component {
   constructor() {
     super();
     this.state = {
-      customerId: "",
+      shopemail: "laundry@gmail.com",
+      useremail: "user@gmail.com",
       slot: "",
-      qunatity: "",
+      quantity: null,
       errors: {},
     };
 
@@ -18,25 +20,40 @@ class PickupUser extends Component {
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-    console.log(this.props);
+    // console.log(this.props);
 
     // console.log(this.props);
   }
   onSubmit(e) {
     e.preventDefault();
-
-    const user = {
+    const order = {
+      shopemail: this.state.shopemail,
+      useremail: this.state.useremail,
+      quantity: this.state.quantity,
       slot: this.state.slot,
-      qunatity: this.state.qunatity,
     };
-
-    Pickup(user).then((res) => {
-      if (res) {
-        this.props.history.push(`/book/payment`);
-      }
-    });
+    axios
+      .post("https://laundrybackend.herokuapp.com/book/add", order)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
+  componentDidMount() {
+    try {
+      const jwt = localStorage.getItem("token");
+      const user = jwtDecode(jwt);
+      // console.log(user);
+      const useremail = "useremail";
+      this.setState({ [useremail]: user.email });
+    } catch (ex) {}
 
+    if (this.props.location.shopemail) {
+      this.setState({ shopemail: this.props.location.shopemail });
+    }
+  }
   render() {
     let SuperPrice = 1;
     if (this.props.location.price) SuperPrice = this.props.location.price;
@@ -48,7 +65,7 @@ class PickupUser extends Component {
         <h1 className="pickhead">Book a Pickup</h1>
         <div className="row">
           <div className="col-md-6 mt-5 mx-auto">
-            <form noValidate className = "pickform"onSubmit={this.onSubmit}>
+            <form noValidate className="pickform" onSubmit={this.onSubmit}>
               <h1 className="h3 mb-3 font-weight-normal price">
                 Price/Cloth is {SuperPrice}
               </h1>
@@ -66,31 +83,33 @@ class PickupUser extends Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="qunatity" className="font-weight-bold">
+                <label htmlFor="quantity" className="font-weight-bold">
                   Specify number of Clothes, Price/Cloth is{" "}
-                  {SuperPrice * this.state.qunatity}
+                  {SuperPrice * this.state.quantity}
                 </label>
                 <input
                   type="number"
                   className="form-control"
-                  name="qunatity"
+                  name="quantity"
                   placeholder="In number"
                   value={this.state.password}
                   onChange={this.onChange}
                 />
               </div>
+
+              <button
+                type="submit"
+                className="btn btn-lg btn-primary btn-block"
+              >
+                Place Order
+              </button>
               <Link
                 to={{
                   pathname: "/payment",
-                  price: SuperPrice * this.state.qunatity,
+                  price: SuperPrice * this.state.quantity,
                 }}
               >
-                <button
-                  type="Submit"
-                  className="btn btn-lg btn-primary btn-block"
-                >
-                  Continue & checkout
-                </button>
+                Pay Now...
               </Link>
             </form>
           </div>

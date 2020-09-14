@@ -5,11 +5,11 @@ import { Grid } from "@material-ui/core";
 import axios from "axios";
 export default function NearByShops(props) {
   const [viewport, setViewport] = useState({
-    latitude: 17.4448,
-    longitude: 78.3498,
+    latitude: props.lat,
+    longitude: props.lng,
     width: "50vw",
     height: "100vh",
-    zoom: 13,
+    zoom: 10,
   });
   const [selectedPark, setSelectedPark] = useState(null);
   useEffect(() => {
@@ -29,7 +29,8 @@ export default function NearByShops(props) {
   useEffect(() => {
     axios
       .get(
-        "https://laundrybackend.herokuapp.com/user/nearbyshops?lat=17.4448&lng=78.3498"
+        `https://laundrybackend.herokuapp.com/user/nearbyshops?lat=${props.lat}&lng=${props.lng}`
+        // `https://laundrybackend.herokuapp.com/user/nearbyshops?lat=${17.4}&lng=${78.3}`
       )
       .then((res) => {
         // console.log(res);
@@ -53,33 +54,11 @@ export default function NearByShops(props) {
   return (
     <div>
       {/* <button onClick={handleOnClick}>Current Location Button</button> */}
-      <Grid
-        container
-        style={
-          {
-            // flexGrow: 1,
-            // display: "flex",
-            // flexDirection: "column",
-            // minHeight: 0,
-          }
-        }
-      >
-        <Grid
-          item
-          xs={12}
-          sm={6}
-          md={6}
-          style={{
-            flexGrow: 1,
-            overflow: "visible",
-          }}
-        >
+      <Grid container>
+        <Grid item xs={12} sm={6} md={6}>
           <LaundryShops
             style={{
               padding: "20px",
-              // flexGrow: 1,
-              // overflow: "auto",
-              // minHeight: "100%",
             }}
           />
         </Grid>
@@ -109,6 +88,7 @@ export default function NearByShops(props) {
                     e.preventDefault();
                     setSelectedPark(store);
                     // console.log(childData);
+                    console.log(props);
                   }}
                 >
                   <img src="/washing.svg" alt="Icon" />

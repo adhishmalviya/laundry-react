@@ -43,7 +43,7 @@ class NavBar extends Component {
         {this.props.user && this.props.user.isShop && (
           <React.Fragment>
             <li className="nav-item">
-              <Link to="/profile" className="nav-link">
+              <Link to="/order" className="nav-link">
                 Orders
               </Link>
             </li>
@@ -57,7 +57,7 @@ class NavBar extends Component {
         {this.props.user && this.props.user.isUser && (
           <React.Fragment>
             <li className="nav-item">
-              <Link to="/pickups" className="nav-link">
+              <Link to="/order" className="nav-link">
                 PickUps
               </Link>
             </li>
