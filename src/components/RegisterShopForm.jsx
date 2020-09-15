@@ -71,7 +71,7 @@ class RegisterShopForm extends Component {
             <input
               type="text"
               name="name"
-              placeholder="enter your shop name"
+              placeholder="Enter your shop name"
               className="rinput"
               onChange={this.handleChange}
             />
@@ -82,7 +82,7 @@ class RegisterShopForm extends Component {
             <input
               type="text"
               name="email"
-              placeholder="enter your emailId"
+              placeholder="Enter your emailId"
               onChange={this.handleChange}
             />
           </label>
@@ -92,7 +92,7 @@ class RegisterShopForm extends Component {
             <input
               type="number"
               name="phoneNumber"
-              placeholder="enter your mobile number"
+              placeholder="Enter your mobile number"
               className="rinput"
               onChange={this.handleChange}
             />
@@ -114,7 +114,7 @@ class RegisterShopForm extends Component {
             <input
               type="text"
               name="OpeningTime"
-              placeholder="enter shop opening time"
+              placeholder="Enter shop's opening time"
               className="rinput"
               onChange={this.handleChange}
             />
@@ -125,7 +125,7 @@ class RegisterShopForm extends Component {
             <input
               type="text"
               name="ClosingTime"
-              placeholder="enter shop closing time"
+              placeholder="Enter shop's closing time"
               onChange={this.handleChange}
             />
           </label>
@@ -135,7 +135,7 @@ class RegisterShopForm extends Component {
             <input
               type="text"
               name="address"
-              placeholder="enter shop address"
+              placeholder="Enter shop's address"
               className="rinput"
               onChange={this.handleChange}
             />
@@ -147,8 +147,9 @@ class RegisterShopForm extends Component {
                   type="checkbox"
                   checked={this.state.isChecked}
                   onChange={this.toggleChange}
+                  style={{ width: "30px" }}
                 />
-                Send your current location as your laundry's location
+                Send your current location as laundry's location
               </label>
             )}
           {!this.state.isChecked && (
@@ -159,7 +160,7 @@ class RegisterShopForm extends Component {
                 <input
                   type="number"
                   name="lat"
-                  placeholder="enter the correct point"
+                  placeholder="Enter Latitudes"
                   onChange={this.handleChange}
                 />
               </label>
@@ -169,7 +170,7 @@ class RegisterShopForm extends Component {
                 <input
                   type="number"
                   name="lng"
-                  placeholder="enter the correct point"
+                  placeholder="Enter Longitudes"
                   className="rinput"
                   onChange={this.handleChange}
                 />
@@ -182,7 +183,7 @@ class RegisterShopForm extends Component {
             <input
               type="number"
               name="price"
-              placeholder="enter your price per cloth"
+              placeholder="Enter your price per cloth"
               onChange={this.handleChange}
             />
           </label>

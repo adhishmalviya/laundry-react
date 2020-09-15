@@ -33,44 +33,59 @@ export default class RegisterUserForm extends Component {
   };
   render() {
     return (
-    <div className="register">
+      <div className="register">
         <h1 className="reghead">
           Want to find laundry shops near you?Register here
         </h1>
-      <form className = "regtform" onSubmit={this.handleSubmit}>
-        <label className = "rlabel">
-          {" "}
-          Your Name Here:
-          <input type="text" name="username" placeholder = "enter your name" 
-           className="rinput"
-          onChange={this.handleChange} />
-        </label>
-        <label className = "rlabel">
-          {" "}
-          Email:
-          <input type="text" name="email" placeholder = "enter your emailId"onChange={this.handleChange} />
-        </label>
-        <label className = "rlabel">
-          {" "}
-          Phone Number:
-          <input
-            type="number"
-            name="phoneNumber"
-             className="rinput"
-             placeholder ="enter your mobile number"
-            onChange={this.handleChange}
-          />
-        </label>
+        <form className="regtform" onSubmit={this.handleSubmit}>
+          <label className="rlabel">
+            {" "}
+            Your Name Here:
+            <input
+              type="text"
+              name="username"
+              placeholder="Enter your name"
+              className="rinput"
+              onChange={this.handleChange}
+            />
+          </label>
+          <label className="rlabel">
+            {" "}
+            Email:
+            <input
+              type="text"
+              name="email"
+              placeholder="Enter your emailId"
+              onChange={this.handleChange}
+            />
+          </label>
+          <label className="rlabel">
+            {" "}
+            Phone Number:
+            <input
+              type="number"
+              name="phoneNumber"
+              className="rinput"
+              placeholder="Enter your mobile number"
+              onChange={this.handleChange}
+            />
+          </label>
 
-        <label className = "rlabel">
-          {" "}
-          Password:
-          <input type="password" name="password" 
-          placeholder = "set a strong password"
-           onChange={this.handleChange} />
-        </label>
-        <button className="btn btn-success btn-block rgbutton" type="submit"> Register </button>
-      </form>
+          <label className="rlabel">
+            {" "}
+            Password:
+            <input
+              type="password"
+              name="password"
+              placeholder="set a strong password"
+              onChange={this.handleChange}
+            />
+          </label>
+          <button className="btn btn-success btn-block rgbutton" type="submit">
+            {" "}
+            Register{" "}
+          </button>
+        </form>
       </div>
     );
   }

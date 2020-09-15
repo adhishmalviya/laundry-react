@@ -5,6 +5,9 @@
 
   height: 612px;
 }
+input {
+  width: 210px;
+}
 .pickform {
   background: black;
   border-radius: 20px;
