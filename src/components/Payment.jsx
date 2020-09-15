@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import StripeCheckout from "react-stripe-checkout";
-
 function Payment(props) {
   const [product, setProduct] = useState({
     name: "Clothes for Wash",
@@ -17,15 +16,16 @@ function Payment(props) {
       "Content-Type": "application/json",
     };
 
-    return fetch(`http://localhost:8282/payment`, {
+    return fetch(`https://laundrybackend.herokuapp.com/payment`, {
       method: "POST",
       headers,
       body: JSON.stringify(body),
     })
       .then((response) => {
-        // console.log("RESPONSE ", response);
+        console.log("RESPONSE ", response);
         const { status } = response;
-        // console.log("STATUS ", status);
+
+        console.log("STATUS ", status);
       })
       .catch((error) => console.log(error));
   };

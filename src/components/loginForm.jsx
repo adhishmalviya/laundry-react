@@ -33,21 +33,35 @@ class LoginForm extends Component {
   }
   render() {
     return (
-     <div className = "login">
-     <h1 className = "reghead">login</h1>
-      <form className = "logform" onSubmit={this.handleSubmit}>
-        <label className = "rllabel">
-          {" "}
-          Email:
-          <input type="email" name="username" placeholder = "enter your registered email"onChange={this.handleChange} />
-        </label>
-        <label className = "rglabel">
-          {" "}
-          Password:
-          <input type="password" name="password" placeholder = "enter your password" onChange={this.handleChange} />
-        </label>
-        <button className = "btn btn-success btn-block rgbutton" type="submit"> Add </button>
-      </form></div>
+      <div className="login">
+        <h1 className="reghead">Login</h1>
+        <form className="logform" onSubmit={this.handleSubmit}>
+          <label className="rllabel">
+            {" "}
+            Email:
+            <input
+              type="email"
+              name="username"
+              placeholder="Enter your registered email"
+              onChange={this.handleChange}
+            />
+          </label>
+          <label className="rglabel">
+            {" "}
+            Password:
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              onChange={this.handleChange}
+            />
+          </label>
+          <button className="btn btn-success btn-block rgbutton" type="submit">
+            {" "}
+            Login{" "}
+          </button>
+        </form>
+      </div>
     );
   }
 }

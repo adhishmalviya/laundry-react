@@ -40,23 +40,23 @@ class PickupUser extends Component {
       .post("https://laundrybackend.herokuapp.com/book/add", order)
       .then((res) => {
         console.log(res);
-
-        this.props.history.push({
-          pathname: "/payment",
-          state: { price: this.state.SuperPrice * this.state.quantity },
-        });
-        // (
-        //   <Redirect
-        //     to={{
-        //       pathname: "/payment",
-        //       price: this.state.SuperPrice * this.state.quantity,
-        //     }}
-        //   ></Redirect>
-        // );
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((e) => {
+        console.log(e);
       });
+
+    this.props.history.push({
+      pathname: "/payment",
+      state: {
+        price: this.state.SuperPrice * this.state.quantity,
+        storename: this.state.shopname,
+        shopemail: this.state.shopemail,
+        useremail: this.state.useremail,
+        username: this.state.username,
+        quantity: this.state.quantity,
+        slot: this.state.slot,
+      },
+    });
   }
   componentDidMount() {
     try {
