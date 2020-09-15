@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
@@ -8,6 +7,7 @@ class PickupUser extends Component {
     super();
     this.state = {
       shopemail: "",
+      username: "",
       useremail: "",
       slot: "",
       quantity: null,
@@ -29,9 +29,10 @@ class PickupUser extends Component {
   onSubmit(e) {
     e.preventDefault();
     const order = {
-      shopname: this.state.shopname,
+      storename: this.state.shopname,
       shopemail: this.state.shopemail,
       useremail: this.state.useremail,
+      username: this.state.username,
       quantity: this.state.quantity,
       slot: this.state.slot,
     };

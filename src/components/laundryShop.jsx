@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import MediaCard from "./shopComponent";
-import { Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import axios from "axios";
@@ -28,8 +26,7 @@ class LaundryShops extends Component {
         // this.setState({ nearByShops: ["a", "b"] });
       });
     try {
-      const jwt = localStorage.getItem("token");
-      const jwt_decoded = jwtDecode(jwt);
+      const jwt_decode = jwtDecode(localStorage.getItem("token"));
       this.setState({ nearByShops: this.state.nearByShops, user: true });
     } catch (e) {
       this.setState({ nearByShops: this.state.nearByShops, user: false });

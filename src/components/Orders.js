@@ -52,7 +52,7 @@ export default class PersonList extends React.Component {
               orders,
               isUser: true,
               columns: [
-                { title: "Shop Name", field: "shopname" },
+                { title: "Shop Name", field: "storename" },
                 { title: "Email", field: "shopemail" },
                 {
                   title: "Number of Clothes",
