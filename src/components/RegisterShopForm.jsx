@@ -131,7 +131,7 @@ class RegisterShopForm extends Component {
           </label>
           <label className="wlabel">
             {" "}
-            address:
+            Address:
             <input
               type="text"
               name="address"
@@ -178,7 +178,7 @@ class RegisterShopForm extends Component {
           )}
           <label className="wlabel">
             {" "}
-            price:
+            Price/Cloth:
             <input
               type="number"
               name="price"

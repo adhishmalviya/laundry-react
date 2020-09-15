@@ -7,8 +7,8 @@ export default function NearByShops(props) {
   const [viewport, setViewport] = useState({
     latitude: props.lat,
     longitude: props.lng,
-    width: "50vw",
-    height: "100vh",
+    width: "625px",
+    height: "550px",
     zoom: 10,
   });
   const [selectedPark, setSelectedPark] = useState(null);

@@ -62,7 +62,12 @@ export default function MediaCard(props) {
         </Button>
         {!props.user && (
           <Link
-            to={{ pathname: "/login", price: props.price, redirected: true }}
+            to={{
+              pathname: "/login",
+              price: props.price,
+              shopname: props.name,
+              redirected: true,
+            }}
           >
             <Button size="small" color="secondary">
               Book a PickUp
@@ -75,6 +80,7 @@ export default function MediaCard(props) {
               pathname: "/book",
               price: props.price,
               shopemail: props.email,
+              shopname: props.name,
             }}
           >
             <Button size="small" color="secondary">

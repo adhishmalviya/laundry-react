@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import MediaCard from "./shopComponent";
 import { Grid } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 class LaundryShops extends Component {
@@ -36,9 +39,16 @@ class LaundryShops extends Component {
     return (
       <div>
         <div>
-          <Grid container spacing={4}>
+          <GridList
+            cellHeight={400}
+            style={{
+              width: 665,
+              height: 550,
+            }}
+            cols={3} /*container spacing={4}*/
+          >
             {this.state.nearByShops.map((shop, index) => (
-              <Grid item xs={12} sm={6} md={4}>
+              <GridListTile /*item xs={12} sm={6} md={4}*/>
                 <MediaCard
                   name={shop.name}
                   email={shop.email}
@@ -54,9 +64,9 @@ class LaundryShops extends Component {
                   user={this.state.user}
                 />
                 {/* <h1>{shop}</h1> */}
-              </Grid>
+              </GridListTile>
             ))}
-          </Grid>
+          </GridList>
         </div>
       </div>
     );

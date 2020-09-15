@@ -4,7 +4,7 @@ import StripeCheckout from "react-stripe-checkout";
 function Payment(props) {
   const [product, setProduct] = useState({
     name: "Clothes for Wash",
-    price: props.location.price,
+    price: props.location.state.price,
     productBy: "Laundry",
   });
 
@@ -36,13 +36,13 @@ function Payment(props) {
         <StripeCheckout
           stripeKey="pk_test_51HOHP2I48GM8q4nTrCjcQGs1hth6YZKupjn3VfXUw9SkaFXtQ1N29gWL7fR7sYR2CIHffA2Pa4ekpy7rWYGZnbiU00J0mvK7wM"
           token={makePayment}
-          name={`Total Cost is ${props.location.price}`}
+          name={`Total Cost is ${props.location.state.price}`}
           amount={product.price * 100}
           shippingAddress
           billingAddress
         >
           <button className="btn btn-lg btn-primary btn-block">
-            Get your layndry done in just {props.location.price} Rs.
+            Get your laundry done in just {props.location.state.price} Rs.
           </button>
         </StripeCheckout>
       </header>

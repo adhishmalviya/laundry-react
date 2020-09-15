@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
+import MaterialTable from "material-table";
 export default class PersonList extends React.Component {
   state = {
     orders: [],
     isShop: false,
     isUser: false,
+    columns: [],
   };
 
   componentDidMount() {
@@ -20,7 +22,23 @@ export default class PersonList extends React.Component {
           )
           .then((res) => {
             const orders = res.data;
-            this.setState({ orders, isShop: true });
+            this.setState({
+              orders,
+              isShop: true,
+              columns: [
+                { title: "Name", field: "username" },
+                { title: "Email", field: "useremail" },
+                {
+                  title: "Number of Clothes",
+                  field: "quantity",
+                  type: "numeric",
+                },
+                {
+                  title: "Slot Booked",
+                  field: "slot",
+                },
+              ],
+            });
           });
       } else if (user.isUser) {
         axios
@@ -30,7 +48,23 @@ export default class PersonList extends React.Component {
           .then((res) => {
             const orders = res.data;
             console.log(res.data);
-            this.setState({ orders, isUser: true });
+            this.setState({
+              orders,
+              isUser: true,
+              columns: [
+                { title: "Shop Name", field: "shopname" },
+                { title: "Email", field: "shopemail" },
+                {
+                  title: "Number of Clothes",
+                  field: "quantity",
+                  type: "numeric",
+                },
+                {
+                  title: "Slot Booked",
+                  field: "slot",
+                },
+              ],
+            });
           });
       }
     } catch (ex) {}
@@ -38,16 +72,48 @@ export default class PersonList extends React.Component {
 
   render() {
     return (
-      <ul>
-        {this.state.orders.map((order) => (
-          <li>
-            {this.state.isShop && <div>{order.useremail}</div>}
-            <div>{order.quantity}</div>
-            {this.state.isUser && <div>{order.shopemail}</div>}
-            <div>{order.slot}</div>
-          </li>
-        ))}
-      </ul>
+      <MaterialTable
+        title="Your Orders"
+        columns={this.state.columns}
+        data={this.state.orders}
+        editable={{
+          onRowAdd: (newData) =>
+            new Promise((resolve) => {
+              setTimeout(() => {
+                resolve();
+                this.setState((prevState) => {
+                  const data = [...prevState.data];
+                  data.push(newData);
+                  return { ...prevState, data };
+                });
+              }, 600);
+            }),
+          onRowUpdate: (newData, oldData) =>
+            new Promise((resolve) => {
+              setTimeout(() => {
+                resolve();
+                if (oldData) {
+                  this.setState((prevState) => {
+                    const data = [...prevState.data];
+                    data[data.indexOf(oldData)] = newData;
+                    return { ...prevState, data };
+                  });
+                }
+              }, 600);
+            }),
+          onRowDelete: (oldData) =>
+            new Promise((resolve) => {
+              setTimeout(() => {
+                resolve();
+                this.setState((prevState) => {
+                  const data = [...prevState.data];
+                  data.splice(data.indexOf(oldData), 1);
+                  return { ...prevState, data };
+                });
+              }, 600);
+            }),
+        }}
+      />
     );
   }
 }
